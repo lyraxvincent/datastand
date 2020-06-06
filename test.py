@@ -2,12 +2,16 @@ from DataStand import datastand
 import pandas as pd
 
 train = pd.read_csv('train.csv')
+#tips = pd.read_csv('tips.csv')
 
 # General statistics
-#datastand.stats(df = train)
+datastand.stats(df = train)
 
 # Report of missing data
 datastand.report_missing(df = train)
 
 # Plot heatmap to visualize missing data
-#datastand.plot_missing(df = train)
+datastand.plot_missing(df = train)
+
+# Impute missing data
+datastand.impute_missing(df = train)
