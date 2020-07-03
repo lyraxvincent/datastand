@@ -2,7 +2,6 @@ from dataStand import datastand
 import pandas as pd
 
 train = pd.read_csv('train.csv')
-#tips = pd.read_csv('tips.csv')
 
 # General statistics
 datastand.stats(train)
