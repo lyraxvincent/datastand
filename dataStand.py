@@ -2,6 +2,7 @@
 ##
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 import seaborn as sns
 import random
 from tqdm import tqdm
@@ -11,7 +12,7 @@ class datastand:
         A helper class for giving insights about data in the following aspects:
             - size of dataframe
             - shape of dataframe
-            - number of numerical, non-numerical, datetime, categorical columns
+            - number of numerical and non-numerical columns
             - show head and tail of dataframe
             - show statistics of missing values, including visualizing the missing data
             - suggest a methodology/ strategy to fill missing values
@@ -23,30 +24,29 @@ class datastand:
 
     # General statistics
 
-    def stats(df):
+    def stats(self=pd.DataFrame()):
 
         print("General stats:\n______________")
-        print(f"Size of DataFrame: {df.size}")
-        print(f"Shape of DataFrame: {df.shape}")
-        print(f"Number of numerical columns: {len(df.select_dtypes(np.number).columns)}")
-        print(f"Number of non-numerical(string) columns: {len(df.select_dtypes('object').columns)}")
-        print(f"Number of datetime columns: {len(df.select_dtypes('datetime').columns)}")
-        print(f"Number of categorical columns: {len(df.select_dtypes('category').columns)}")
+        print(f"Size of DataFrame: {self.size}")
+        print(f"Shape of DataFrame: {self.shape}")
+        print(f"Number of unique data types : {set(self.dtypes)}")
+        print(f"Number of numerical columns: {len(self.select_dtypes(np.number).columns)}")
+        print(f"Number of non-numerical columns: {len(self.select_dtypes('object').columns)}")
 
         print(f"\nHead of DataFrame:")
-        print(f"__________________\n{df.head()}")
+        print(f"__________________\n{self.head()}")
         print(f"\nTail of DataFrame:")
-        print(f"__________________\n{df.tail()}")
+        print(f"__________________\n{self.tail()}")
 
     # Missing data statistics
 
-    def report_missing(df):
+    def report_missing(self=pd.DataFrame()):
 
-        if df.isnull().values.any() == True:
-            print(f"\nDataFrame contains {df.isnull().values.sum()} missing values("
-                  f"{df.isnull().values.sum()/df.size *100 :.2f}%) as follows column-wise:")
+        if self.isnull().values.any() == True:
+            print(f"\nDataFrame contains {self.isnull().values.sum()} missing values("
+                  f"{self.isnull().values.sum() / self.size *100 :.2f}%) as follows column-wise:")
             print("-----------------------------------------------------------------------")
-            print(df.isnull().sum())  # Prints every column with corresponding number of missing values
+            print(self.isnull().sum())  # Prints every column with corresponding number of missing values
             print("-----------------------------------------------------------------------")
 
             # Long listing missing data statistics (for every column)
@@ -54,19 +54,19 @@ class datastand:
             print("\n")
 
             if choice == 'Y':
-                for col in df.select_dtypes(np.number):     # Select only numerical columns
+                for col in self.select_dtypes(np.number):     # Select only numerical columns
 
-                    if df[str(col)].isnull().any() == True:
+                    if self[str(col)].isnull().any() == True:
                         print(f"Column: \n\t{col}")
-                        print("\nMissing data points {} out of total {}.".format(df[str(col)].isnull().sum(),
-                                                                                 len(df[str(col)])))
+                        print("\nMissing data points {} out of total {}.".format(self[str(col)].isnull().sum(),
+                                                                                 len(self[str(col)])))
 
                         # Show max, min, mean, std values of the column
                         # Helps user to choose an imputation strategy
-                        print("Max value: {} Min value: {} \nMean: {} Std: {} ".format(df[str(col)].max(),
-                                                                                       df[str(col)].min(),
-                                                                                       np.mean(df[str(col)]),
-                                                                                       np.std(df[str(col)])))
+                        print("Max value: {} Min value: {} \nMean: {} Std: {} ".format(self[str(col)].max(),
+                                                                                       self[str(col)].min(),
+                                                                                       np.mean(self[str(col)]),
+                                                                                       np.std(self[str(col)])))
                         print("_________________________________________________________________")
                     else:
                         pass
@@ -81,7 +81,7 @@ class datastand:
 
             if plot_choice == 'Y':
                 plt.figure(figsize=(16, 10))
-                sns.heatmap(df.isnull(), cbar=False, yticklabels=False)
+                sns.heatmap(self.isnull(), cbar=False, yticklabels=False)
                 plt.title("Missing Data Heatmap (Cream/Grey parts show missing data)")
                 plt.tight_layout()
                 plt.show()
@@ -93,10 +93,10 @@ class datastand:
             print("\nDataFrame has no missing values.")
 
 
-    def plot_missing(df):
-        if df.isnull().values.any() == True:    # Plot only if there are missing values
+    def plot_missing(self=pd.DataFrame()):
+        if self.isnull().values.any() == True:    # Plot only if there are missing values
             plt.figure(figsize=(16, 10))
-            sns.heatmap(df.isnull(), cbar=False, yticklabels=False, )
+            sns.heatmap(self.isnull(), cbar=False, yticklabels=False, )
             plt.title("Missing Data Heatmap (Cream/Grey parts show missing data)")
             plt.tight_layout()
             plt.show()
@@ -105,7 +105,7 @@ class datastand:
 
     # Imputation of missing data
 
-    def impute_missing(df):
+    def impute_missing(self=pd.DataFrame()):
         """
             Iterate through dataframe columns; Fill missing value with a random value chosen from:
                 np.arange(min value in the column, max_value, standard deviation of the column)
@@ -116,26 +116,29 @@ class datastand:
         TODO:
             Add functionality for imputing categorical data
         """
-        if df.isnull().values.any() == True:
+        if self.isnull().values.any() == True:
             print("Imputing missing data...")
 
-            for col in tqdm(df.columns):
+            for col in tqdm(self.columns):
 
                 # If column has missing values and they are less than half of the total
-                if df[str(col)].isnull().any() == True and df[str(col)].isnull().values.sum() < len(df[str(col)]) / 2:
+                if self[str(col)].isnull().any() == True and self[str(col)].isnull().values.sum() < len(self[str(col)]) / 2:
 
                     # Values following distribution of the column(trend of data in the column)
-                    values = np.arange(df[str(col)].min(), df[str(col)].max(), np.std(df[str(col)]))
+                    values = np.arange(self[str(col)].min(), self[str(col)].max(), np.std(self[str(col)]))
 
                     # Iterate through column values
-                    for i in range(len(df[str(col)])):
-                        if np.isnan(df.loc[i, str(col)]):  # check if value is nan; Returns True/ False
+                    for i in range(len(self[str(col)])):
+                        if np.isnan(self.loc[i, str(col)]):  # check if value is nan; Returns True/ False
 
-                            df.loc[i, str(col)] = random.choice(values)  # pick a random value from values
+                            self.loc[i, str(col)] = random.choice(values)  # pick a random value from values
                         else:
                             pass
                 else:
                     pass
+            # save changes to dataframe
+            self.to_csv(index=False)
+
             print("Imputation complete.")
         else:
             print("DataFrame has no missing data hence no values to be imputed.")
