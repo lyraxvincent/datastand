@@ -136,9 +136,6 @@ class datastand:
                             pass
                 else:
                     pass
-            # save changes to dataframe
-            self.to_csv(index=False)
-
             print("Imputation complete.")
         else:
             print("DataFrame has no missing data hence no values to be imputed.")

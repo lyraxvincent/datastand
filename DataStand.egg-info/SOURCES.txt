@@ -1,0 +1,10 @@
+DataStand
+README.md
+setup.py
+DataStand/__init__.py
+DataStand/datastand.py
+DataStand/setup.py
+DataStand.egg-info/PKG-INFO
+DataStand.egg-info/SOURCES.txt
+DataStand.egg-info/dependency_links.txt
+DataStand.egg-info/top_level.txt
