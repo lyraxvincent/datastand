@@ -1,18 +1,26 @@
 # DataStand
 
 -----------
-![package logo](logo.jpg)
+![package logo](images/logo.jpg)
 Why DataStand? __Data + Understand__  
 A python package to help users especially Data Scientists, Machine Learning Engineers and Analysts to better understand DATA. Gives quick insights about given Data.  
 
 
 ------------------
-### Example outputs :
+### Usage :
+Code:
+```python
+from DataStand import DataStand
+import pandas as pd
 
+df = pd.read_csv("path/to/target/dataframe")
+
+DataStand(df)
+
+```
+Output:
 ```python
 
-# general dataframe statistics
-##
 General stats:
 ______________
 Size of DataFrame: 309200
@@ -42,12 +50,9 @@ __________________
 3864        1015056                      NGC 5237                    1.032244  ...                                29.957851                       0.583706  0.100069
 
 [5 rows x 80 columns]
-```
 
-```python
-
-# missing data statistics
-##
+Missing data:
+=======================
 DataFrame contains 185698 missing values(60.06%) as follows column-wise:
 -----------------------------------------------------------------------
 galactic year                                                                   0
@@ -64,20 +69,37 @@ y                                                                               
 Length: 80, dtype: int64
 -----------------------------------------------------------------------
 
-Do you wish to long-list missing data statistics?(y/n):
+Do you wish to long-list missing data statistics?(y/n): y
+.
+.
+.
 ```
-
+Code:
 ```python
+# This function is already available in the DataStand class and also available separately
+# Here we're running it separately 
+from DataStand import plot_missing
 
-# data imputation
-##
+plot_missing(df)
+
+```
+Output:
+
+![missing data heatmap](images/missing data heatmap.png)
+
+Code:
+```python
+from DataStand import impute_missing
+
+impute_missing(df)
+
+```
+Output:
+```python
 Imputing missing data...
 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 80/80 [00:02<00:00, 30.52it/s]
 Imputation complete.
 ```
-
-- 
-- 
-- 
-
-**(publishing and documentation coming soon)**  
+## Author/Maintainer
+**Vincent Njonge.**
+[[LinkedIn]](https://www.linkedin.com/in/vincent-njonge-528070178)  [[Twitter]](https://twitter.com/lyraxvincent)
