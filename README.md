@@ -85,7 +85,7 @@ plot_missing(df)
 ```
 Output:
 
-![missing data heatmap](images/missing data heatmap.png)
+![missing data heatmap](images/missing_data_heatmap.png)
 
 Code:
 ```python
