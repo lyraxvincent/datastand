@@ -1,9 +1,10 @@
 DataStand
 README.md
 setup.py
+DataStand/DataStand.py
 DataStand/__init__.py
-DataStand/datastand.py
 DataStand/setup.py
+DataStand/test.py
 DataStand.egg-info/PKG-INFO
 DataStand.egg-info/SOURCES.txt
 DataStand.egg-info/dependency_links.txt
