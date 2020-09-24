@@ -6,11 +6,11 @@ with open("README.md", "r") as f:
 setuptools.setup(
     name='DataStand',
     packages=['DataStand'],
-    version='1.0',
+    version='1.1',
     license='MIT  ',
     author="Vincent Njonge",
     author_email="njongevincent@gmail.com",
-    description="A python package that helps to better understand a dataset.",
+    description="A python package that helps Data Scientists, Machine Learning Engineers and Analysts to quickly explore and understand a dataset.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/lyraxvincent/DataStand",

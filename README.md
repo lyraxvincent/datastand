@@ -7,6 +7,12 @@ A python package to help users especially Data Scientists, Machine Learning Engi
 
 
 ------------------
+
+# Installation
+Run the following command on the terminal to install the package:
+```python
+pip install DataStand
+```
 ### Usage :
 Code:
 ```python
