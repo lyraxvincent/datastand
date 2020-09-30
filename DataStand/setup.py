@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
      name='DataStand',
-     version='1.1',
+     version='1.2',
      scripts=['DataStand'],
      author="Vincent Njonge",
      author_email="njongevincent@gmail.com",
