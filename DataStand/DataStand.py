@@ -98,7 +98,7 @@ def plot_missing(df):
         plt.tight_layout()
         plt.show()
     else:
-        pass
+        print("Dataframe has no missing values.")
 
 # Imputation of missing data
 
