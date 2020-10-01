@@ -78,7 +78,7 @@ class DataStand:
             if plot_choice == 'Y':
                 plt.figure(figsize=(16, 10))
                 sns.heatmap(df.isnull(), cbar=False, yticklabels=False)
-                plt.title("Missing Data Heatmap (Cream/Grey parts show missing data)")
+                plt.title("Missing Data Heatmap")
                 plt.tight_layout()
                 plt.show()
 
@@ -94,7 +94,7 @@ def plot_missing(df):
     if df.isnull().values.any() == True:    # Plot only if there are missing values
         plt.figure(figsize=(16, 10))
         sns.heatmap(df.isnull(), cbar=False, yticklabels=False, )
-        plt.title("Missing Data Heatmap (Cream/Grey parts show missing data)")
+        plt.title("Missing Data Heatmap")
         plt.tight_layout()
         plt.show()
     else:
