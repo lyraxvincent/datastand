@@ -13,7 +13,8 @@ setuptools.setup(
     description="""A python package to help users especially Data Scientists, Machine Learning Engineers and 
     Analysts to better understand a dataset. Gives quick insights about given data; general dataset statistics, 
     size and shape of dataset, number of unique data types, number of numerical and non-numerical columns, small 
-    overview of dataset, missing data statistics, missing data heatmap and provides methodology to impute missing data.""",
+    overview of dataset, data description, missing data statistics, missing data heatmap and provides methodology 
+    to impute missing data.""",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/lyraxvincent/DataStand",

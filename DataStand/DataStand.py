@@ -31,16 +31,15 @@ class DataStand:
         print(f"Number of numerical columns: {len(df.select_dtypes(np.number).columns)}")
         print(f"Number of non-numerical columns: {len(df.select_dtypes('object').columns)}")
 
-        print(f"\nHead of DataFrame:")
-        print(f"__________________\n{df.head()}")
-        print(f"\nTail of DataFrame:")
-        print(f"__________________\n{df.tail()}")
+        print(f"\nHead of DataFrame:\n__________________\n{df.head()}")
+        print(f"\nTail of DataFrame:\n__________________\n{df.tail()}")
+        print(f"\n\nData description:\n_________________\n{df.describe().T}")
 
         # Missing data statistics
 
         if df.isnull().values.any() == True:
-            print("\nMissing data:\n=======================")
-            print(f"DataFrame contains {df.isnull().values.sum()} missing values("
+            print("\n\nMissing data:\n=======================")
+            print(f"DataFrame contains {df.isnull().values.sum()} missing values ("
                   f"{df.isnull().values.sum() / df.size *100 :.2f}%) as follows column-wise:")
             print("-----------------------------------------------------------------------")
             print(df.isnull().sum())  # Prints every column with corresponding number of missing values
