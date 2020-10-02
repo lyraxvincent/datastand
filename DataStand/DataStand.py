@@ -101,7 +101,7 @@ def plot_missing(df):
 
 # Imputation of missing data
 
-def impute_missing(df):
+def impute_missing(df, inplace=False):
     """
         Iterate through dataframe columns; Fill missing value with a random value chosen from:
             np.arange(min value in the column, max_value, standard deviation of the column)
@@ -112,27 +112,55 @@ def impute_missing(df):
     TODO:
         Add functionality for imputing categorical data
     """
-    if df.isnull().values.any() == True:
-        print("\nImputing missing data...")
+    if inplace == True:
+        if df.isnull().values.any() == True:
+            print("\nImputing missing data...")
 
-        for col in tqdm(df.columns):
+            for col in tqdm(df.columns):
 
-            # If column has missing values and they are less than half of the total
-            if df[str(col)].isnull().any() == True and df[str(col)].isnull().values.sum() < len(df[str(col)]) / 2:
+                # If column has missing values and they are less than half of the total
+                if df[str(col)].isnull().any() == True and df[str(col)].isnull().values.sum() < len(df[str(col)]) / 2:
 
-                # Values following distribution of the column(trend of data in the column)
-                values = np.arange(df[str(col)].min(), df[str(col)].max(), np.std(df[str(col)]))
+                    # Values following distribution of the column(trend of data in the column)
+                    values = np.arange(df[str(col)].min(), df[str(col)].max(), np.std(df[str(col)]))
 
-                # Iterate through column values
-                for i in range(len(df[str(col)])):
-                    if np.isnan(df.loc[i, str(col)]):  # check if value is nan; Returns True/ False
+                    # Iterate through column values
+                    for i in range(len(df[str(col)])):
+                        if np.isnan(df.loc[i, str(col)]):  # check if value is nan; Returns True/ False
 
-                        df.loc[i, str(col)] = random.choice(values)  # pick a random value from values
-                    else:
-                        pass
-            else:
-                pass
-        print("Imputation complete.")
-        return df
+                            df.loc[i, str(col)] = random.choice(values)  # pick a random value from values
+                        else:
+                            pass
+                else:
+                    pass
+            print("Imputation complete.")
+
+        else:
+            print("DataFrame has no missing data hence no values to be imputed.")
+
     else:
-        print("DataFrame has no missing data hence no values to be imputed.")
+        df_ = df.copy()     # make copy to avoid imputing inplace
+        if df_.isnull().values.any() == True:
+            print("\nImputing missing data...")
+
+            for col in tqdm(df_.columns):
+
+                # If column has missing values and they are less than half of the total
+                if df_[str(col)].isnull().any() == True and df_[str(col)].isnull().values.sum() < len(df_[str(col)]) / 2:
+
+                    # Values following distribution of the column(trend of data in the column)
+                    values = np.arange(df_[str(col)].min(), df_[str(col)].max(), np.std(df_[str(col)]))
+
+                    # Iterate through column values
+                    for i in range(len(df_[str(col)])):
+                        if np.isnan(df_.loc[i, str(col)]):  # check if value is nan; Returns True/ False
+
+                            df_.loc[i, str(col)] = random.choice(values)  # pick a random value from values
+                        else:
+                            pass
+                else:
+                    pass
+            print("Imputation complete.")
+            return df_
+        else:
+            print("DataFrame has no missing data hence no values to be imputed.")
