@@ -139,7 +139,7 @@ def impute_missing(df, inplace=False):
             print("DataFrame has no missing data hence no values to be imputed.")
 
     else:
-        df_ = df     # make copy to avoid imputing inplace
+        df_ = df[:]     # make copy to avoid imputing inplace
         if df_.isnull().values.any() == True:
             print("\nImputing missing data...")
 
