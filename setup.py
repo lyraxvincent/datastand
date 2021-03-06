@@ -4,8 +4,8 @@ with open("README.md", "r") as f:
     long_description = f.read()
 
 setuptools.setup(
-    name='DataStand',
-    packages=['DataStand'],
+    name='datastand',
+    packages=['datastand'],
     version='1.6',
     license='MIT  ',
     author="Vincent Njonge",
@@ -17,7 +17,7 @@ setuptools.setup(
     to impute missing data.""",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/lyraxvincent/DataStand",
+    url="https://github.com/lyraxvincent/datastand",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License"

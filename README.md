@@ -1,8 +1,8 @@
-# DataStand
+# datastand
 
 -----------
 ![package logo](images/logo.jpg)
-Why DataStand? __Data + Understand__  
+Why datastand? __Data + Understand__  
 A python package to help users especially Data Scientists, Machine Learning Engineers and Analysts to better understand DATA. Gives quick insights about given Data.  
 
 
@@ -11,7 +11,7 @@ A python package to help users especially Data Scientists, Machine Learning Engi
 # Installation
 Run the following command on the terminal to install the package:
 ```python
-pip install DataStand
+pip install datastand
 ```
 ### Usage :
 Code:

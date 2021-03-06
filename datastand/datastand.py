@@ -7,7 +7,7 @@ import seaborn as sns
 import random
 from tqdm import tqdm
 
-class DataStand:
+class datastand:
     """
         A helper class for giving insights about data in the following aspects:
             - size of dataframe
