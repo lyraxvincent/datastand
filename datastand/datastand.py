@@ -53,7 +53,7 @@ class datastand:
                 for col in df.columns:
 
                     if df[str(col)].isnull().any() == True:
-                        print(f"Column: \n\t{col}\n\t_______________}")
+                        print(f"Column: \n\t{col}\n\t_______________")
                         print("\nMissing data points {} out of total {}.".format(df[str(col)].isnull().sum(),
                                                                                  len(df[str(col)])))
 

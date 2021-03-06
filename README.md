@@ -3,7 +3,7 @@
 -----------
 ![package logo](images/logo.jpg)
 Why datastand? __Data + Understand__  
-A python package to help users especially Data Scientists, Machine Learning Engineers and Analysts to better understand DATA. Gives quick insights about given Data.  
+A python package to help users especially Data Scientists, Machine Learning Engineers and Analysts to better understand DATA. Gives quick insights about a given dataset.  
 
 
 ------------------
@@ -16,12 +16,12 @@ pip install datastand
 ### Usage :
 Code:
 ```python
-from DataStand.DataStand import DataStand
+from datastand.datastand import datastand
 import pandas as pd
 
 df = pd.read_csv("path/to/target/dataframe")
 
-DataStand(df)
+datastand(df)
 
 ```
 Output:
@@ -84,7 +84,7 @@ Code:
 ```python
 # This function is already available in the DataStand class and also available separately
 # Here we're running it separately 
-from DataStand.DataStand import plot_missing
+from datastand.datastand import plot_missing
 
 plot_missing(df)
 
@@ -95,7 +95,7 @@ Output:
 
 Code:
 ```python
-from DataStand.DataStand import impute_missing
+from datastand.datastand import impute_missing
 
 impute_missing(df)
 
