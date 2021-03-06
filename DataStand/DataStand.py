@@ -50,20 +50,23 @@ class DataStand:
             print("\n")
 
             if choice == 'Y':
-                for col in df.select_dtypes(np.number):     # Select only numerical columns
+                for col in df.columns:
 
                     if df[str(col)].isnull().any() == True:
-                        print(f"Column: \n\t{col}")
+                        print(f"Column: \n\t{col}\n\t_______________}")
                         print("\nMissing data points {} out of total {}.".format(df[str(col)].isnull().sum(),
                                                                                  len(df[str(col)])))
 
-                        # Show max, min, mean, std values of the column
+                        # Show max, min, mean, std values of the column if numerical
                         # Helps user to choose an imputation strategy
-                        print("Max value: {} Min value: {} \nMean: {} Std: {} ".format(df[str(col)].max(),
-                                                                                       df[str(col)].min(),
-                                                                                       np.mean(df[str(col)]),
-                                                                                       np.std(df[str(col)])))
-                        print("_________________________________________________________________")
+                        if df[col].dtype == int or df[col].dtype == float:
+                            print("Max value: {} Min value: {} \nMean: {} Std: {} ".format(df[str(col)].max(),
+                                                                                           df[str(col)].min(),
+                                                                                           np.mean(df[str(col)]),
+                                                                                           np.std(df[str(col)])))
+                            print("_________________________________________________________________")
+                        else:
+                            pass
                     else:
                         pass
 
@@ -139,7 +142,7 @@ def impute_missing(df, inplace=False):
             print("DataFrame has no missing data hence no values to be imputed.")
 
     else:
-        df_ = df[:]     # make copy to avoid imputing inplace
+        df_ = df.copy()     # make copy to avoid imputing inplace
         if df_.isnull().values.any() == True:
             print("\nImputing missing data...")
 
