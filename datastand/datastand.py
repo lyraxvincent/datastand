@@ -118,18 +118,20 @@ def impute_missing(df, inplace=False, method='constant'):
     :return: Imputed DataFrame
 
     NOTES:
-        Iterate through dataframe columns; Fill missing value with a random value chosen from:
+        Iterate through dataframe columns;
+        For numerical columns: fill missing value with a random value chosen from:
             np.arange(min value in the column, max_value, standard deviation of the column)
+        For categorical columns: fill with a constant value (method 1)
+                                 fill with a value chosen from the already existing categories at random
         This way we ensure we maintain the trend of data in that particular column
         We impute only columns with less than half missing data points of the total length of the column
     """
 
     if inplace == True:
-        if df.isnull().values.any() == True:
-            print("\nImputing missing data...")
 
-            # select dtypes int and obj
-            # impute accordingly
+        if df.isnull().values.any() == True:
+
+            print("\nImputing missing data...")
 
             # Impute numerical columns
             for col in df.select_dtypes(np.number).columns:
@@ -141,7 +143,7 @@ def impute_missing(df, inplace=False, method='constant'):
                     values = np.arange(df[str(col)].min(), df[str(col)].max(), np.std(df[str(col)]))
 
                     # Iterate through column values
-                    for i in trange(len(df[str(col)])):
+                    for i in range(len(df[str(col)])):
                         if np.isnan(df.loc[i, str(col)]):  # check if value is nan; Returns True/ False
 
                             df.loc[i, str(col)] = random.choice(values)  # pick a random value from values
@@ -173,14 +175,13 @@ def impute_missing(df, inplace=False, method='constant'):
                     # method 2 - 'constant' == 'NULL'
                     elif method == 'constant':
                         print(
-                            f"Imputing categorical column [{col}] with default method 'constant', "
+                            f"Imputing categorical column [{col}] with default method='constant', "
                             f"for otherwise please specify the method parameter.")
                         for i in range(len(df[str(col)])):
                             try:
                                 if np.isnan(df.loc[i, str(col)]):
                                     df.loc[i, str(col)] = 'NULL'
-                            except TypeError as e:
-                                # print("TypeError: ", e)
+                            except TypeError:
                                 pass
 
                 else:
@@ -196,7 +197,7 @@ def impute_missing(df, inplace=False, method='constant'):
             print("\nImputing missing data...")
 
             # Impute numerical columns
-            for col in tqdm(df_.select_dtypes(np.number)columns):
+            for col in df_.select_dtypes(np.number).columns:
 
                 # If column has missing values and they are less than half of the total
                 if df_[str(col)].isnull().any() == True and df_[str(col)].isnull().values.sum() < len(df_[str(col)]) / 2:
@@ -237,14 +238,13 @@ def impute_missing(df, inplace=False, method='constant'):
                     # method 2 - 'constant' == 'NULL'
                     elif method == 'constant':
                         print(
-                            f"Imputing categorical column [{col}] with default method 'constant', "
+                            f"Imputing categorical column [{col}] with default method='constant', "
                             f"for otherwise please specify the method parameter.")
                         for i in range(len(df_[str(col)])):
                             try:
                                 if np.isnan(df_.loc[i, str(col)]):
                                     df_.loc[i, str(col)] = 'NULL'
-                            except TypeError as e:
-                                # print("TypeError: ", e)
+                            except TypeError:
                                 pass
 
                 else:
