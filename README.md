@@ -3,7 +3,7 @@
 -----------
 ![package logo](images/logo.jpg)
 Why datastand? __Data + Understand__  
-A python package to help users especially Data Scientists, Machine Learning Engineers and Analysts to better understand DATA. Gives quick insights about a given dataset.  
+A python package to help Data Scientists, Machine Learning Engineers and Analysts better understand data. Gives quick insights about a given dataset.  
 
 
 ------------------
