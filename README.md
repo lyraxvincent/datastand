@@ -35,27 +35,6 @@ Number of unique data types : {dtype('int64'), dtype('O'), dtype('float64')}
 Number of numerical columns: 79
 Number of non-numerical columns: 1
 
-Head of DataFrame:
-__________________
-   galactic year                        galaxy  existence expectancy index  ...  Private galaxy capital flows (% of GGP)  Gender Inequality Index (GII)         y
-0         990025  Large Magellanic Cloud (LMC)                    0.628657  ...                                      NaN                            NaN  0.052590
-1         990025              Camelopardalis B                    0.818082  ...                                22.785018                            NaN  0.059868
-2         990025                       Virgo I                    0.659443  ...                                      NaN                            NaN  0.050449
-3         990025            UGC 8651 (DDO 181)                    0.555862  ...                                      NaN                            NaN  0.049394
-4         990025                  Tucana Dwarf                    0.991196  ...                                      NaN                            NaN  0.154247
-
-[5 rows x 80 columns]
-
-Tail of DataFrame:
-__________________
-      galactic year                        galaxy  existence expectancy index  ...  Private galaxy capital flows (% of GGP)  Gender Inequality Index (GII)         y
-3860        1015056                     Columba I                    1.029704  ...                                29.294865                       0.580785  0.042324
-3861        1015056  Leo II Dwarf (Leo B, DDO 93)                    0.937869  ...                                31.085400                       0.517558  0.036725
-3862        1015056        Canes Venatici I Dwarf                    1.036144  ...                                32.145570                       0.363862  0.166271
-3863        1015056                         KKs 3                    0.939034  ...                                27.227179                       0.711878  0.024187
-3864        1015056                      NGC 5237                    1.032244  ...                                29.957851                       0.583706  0.100069
-
-[5 rows x 80 columns]
 
 Missing data:
 =======================
@@ -107,5 +86,5 @@ Imputing missing data...
 Imputation complete.
 ```
 ## Author/Maintainer
-**Vincent Njonge.**
+**Vincent N.**
 [[LinkedIn]](https://www.linkedin.com/in/vincent-njonge-528070178)  [[Twitter]](https://twitter.com/lyraxvincent)
