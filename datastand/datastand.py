@@ -30,9 +30,13 @@ class datastand:
         print(f"Number of unique data types : {set(df.dtypes)}")
         print(f"Number of numerical columns: {len(df.select_dtypes(np.number).columns)}")
         print(f"Number of non-numerical columns: {len(df.select_dtypes('object').columns)}")
-
-        print(f"\nHead of DataFrame:\n__________________\n{df.head()}")
-        print(f"\nTail of DataFrame:\n__________________\n{df.tail()}")
+        
+        # Only show dataframe preview when length of all column names put together <= 100
+        if len(' '.join(df.columns)) <= 100:
+            print(f"\nHead of DataFrame:\n__________________\n{df.head()}")
+        else:
+            pass
+        
         print(f"\n\nData description:\n_________________\n{df.describe().T}")
 
         # Missing data statistics
