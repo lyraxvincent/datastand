@@ -6,7 +6,7 @@ with open("README.md", "r") as f:
 setuptools.setup(
     name='datastand',
     packages=['datastand'],
-    version='2.0',
+    version='2.1',
     license='MIT  ',
     author="Vincent Njonge",
     author_email="njongevincent@gmail.com",
