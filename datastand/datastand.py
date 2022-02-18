@@ -131,7 +131,7 @@ def impute_missing(df, inplace=False, method='constant'):
         We impute only columns with less than half missing data points of the total length of the column
     """
 
-    if inplace == True:
+    if inplace:
 
         if df.isnull().values.any() == True:
 
@@ -178,9 +178,6 @@ def impute_missing(df, inplace=False, method='constant'):
 
                     # method 2 - 'constant' == 'NULL'
                     elif method == 'constant':
-                        print(
-                            f"Imputing categorical column [{col}] with default method='constant', "
-                            f"for otherwise please specify the method parameter.")
                         for i in range(len(df[str(col)])):
                             try:
                                 if np.isnan(df.loc[i, str(col)]):
@@ -241,9 +238,6 @@ def impute_missing(df, inplace=False, method='constant'):
 
                     # method 2 - 'constant' == 'NULL'
                     elif method == 'constant':
-                        print(
-                            f"Imputing categorical column [{col}] with default method='constant', "
-                            f"for otherwise please specify the method parameter.")
                         for i in range(len(df_[str(col)])):
                             try:
                                 if np.isnan(df_.loc[i, str(col)]):
