@@ -16,7 +16,7 @@ pip install datastand
 ### Usage :
 Code:
 ```python
-from datastand.datastand import datastand
+from datastand import datastand
 import pandas as pd
 
 df = pd.read_csv("path/to/target/dataframe")
@@ -63,7 +63,7 @@ Code:
 ```python
 # This function is already available in the DataStand class and also available separately
 # Here we're running it separately 
-from datastand.datastand import plot_missing
+from datastand import plot_missing
 
 plot_missing(df)
 
@@ -74,7 +74,7 @@ Output:
 
 Code:
 ```python
-from datastand.datastand import impute_missing
+from datastand import impute_missing
 
 impute_missing(df)
 

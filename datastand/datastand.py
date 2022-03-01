@@ -10,13 +10,12 @@ from tqdm import tqdm, trange
 class datastand:
     """
         A helper class for giving insights about data in the following aspects:
-            - size of dataframe
-            - shape of dataframe
+            - size and shape of dataframe
             - number of numerical and non-numerical columns
-            - show head and tail of dataframe
+            - small overview of dataframe
             - show statistics of missing values, including visualizing the missing data
             - suggest a methodology/ strategy to fill missing values
-            - filling missing values if the user chooses to
+            - filling missing values with the chosen method
     """
 
     def __init__(self, df):
@@ -36,8 +35,6 @@ class datastand:
             print(f"\nHead of DataFrame:\n__________________\n{df.head()}")
         else:
             pass
-        
-        print(f"\n\nData description:\n_________________\n{df.describe().T}")
 
         # Missing data statistics
 
@@ -79,6 +76,9 @@ class datastand:
 
             elif choice == 'N':
                 pass
+            
+            else:
+                pass
 
             # Further visualizing missing data
             plot_choice = input("\nYou can visualize missing data automatically right away or you can use the " \
@@ -92,6 +92,9 @@ class datastand:
                 plt.show()
 
             elif plot_choice == 'N':
+                pass
+            
+            else:
                 pass
 
         else:
@@ -115,13 +118,15 @@ def impute_missing(df, inplace=False, method='constant'):
     """
 
     :param df: Pandas DataFrame
-    :param inplace: Hold changes to DataFrame or not
+    :param inplace: Hold changes to original DataFrame or not
     :param method: How to impute categorical columns
                     'constant' - fill with a constant value 'NULL'
                     'random' - pick a value from existing categories and fill at random
+                    
     :return: Imputed DataFrame
 
     NOTES:
+    ------
         Iterate through dataframe columns;
         For numerical columns: fill missing value with a random value chosen from:
             np.arange(min value in the column, max_value, standard deviation of the column)
@@ -129,125 +134,59 @@ def impute_missing(df, inplace=False, method='constant'):
                                  fill with a value chosen from the already existing categories at random
         This way we ensure we maintain the trend of data in that particular column
         We impute only columns with less than half missing data points of the total length of the column
+        
     """
+    
 
     if inplace:
-
-        if df.isnull().values.any() == True:
-
-            print("\nImputing missing data...")
-
-            # Impute numerical columns
-            for col in df.select_dtypes(np.number).columns:
-
-                # If column has missing values and they are less than half of the total
-                if df[str(col)].isnull().any() == True and df[str(col)].isnull().values.sum() < len(df[str(col)]) / 2:
-
-                    # Values following distribution of the column(trend of data in the column)
-                    values = np.arange(df[str(col)].min(), df[str(col)].max(), np.std(df[str(col)]))
-
-                    # Iterate through column values
-                    for i in range(len(df[str(col)])):
-                        if np.isnan(df.loc[i, str(col)]):  # check if value is nan; Returns True/ False
-
-                            df.loc[i, str(col)] = random.choice(values)  # pick a random value from values
-                        else:
-                            pass
-                else:
-                    pass
-
-            # Impute categorical columns
-            for col in df.select_dtypes('O').columns:
-                if (df[col].dtype == 'O') & (df[col].nunique() < 21): # consider only columns with =<20 unique values
-
-                    # method 1 - 'random'
-                    if method == 'random':
-
-                        values = list(df[col].unique())
-                        if np.nan in values:
-                            values.remove(np.nan)
-                        else:
-                            pass
-
-                        for i in range(len(df[str(col)])):
-                            try:
-                                if np.isnan(df.loc[i, str(col)]):
-                                    df.loc[i, str(col)] = random.choice(values)
-                            except TypeError:
-                                pass
-
-                    # method 2 - 'constant' == 'NULL'
-                    elif method == 'constant':
-                        for i in range(len(df[str(col)])):
-                            try:
-                                if np.isnan(df.loc[i, str(col)]):
-                                    df.loc[i, str(col)] = 'NULL'
-                            except TypeError:
-                                pass
-
-                else:
-                    pass
-            print("Imputation complete.")
-
-        else:
-            print("DataFrame has no missing data hence no values to be imputed.")
-
+        df_ = df
     else:
-        df_ = df[:]     # make copy to avoid imputing inplace
-        if df_.isnull().values.any() == True:
-            print("\nImputing missing data...")
+        df_ = df[:]  # make a copy explicitly to avoid imputing inplace
 
-            # Impute numerical columns
-            for col in df_.select_dtypes(np.number).columns:
-
-                # If column has missing values and they are less than half of the total
-                if df_[str(col)].isnull().any() == True and df_[str(col)].isnull().values.sum() < len(df_[str(col)]) / 2:
-
-                    # Values following distribution of the column(trend of data in the column)
-                    values = np.arange(df_[str(col)].min(), df_[str(col)].max(), np.std(df_[str(col)]))
-
-                    # Iterate through column values
+         
+    if df_.isnull().values.any() == True:
+        print("\nImputing missing data...")
+        # Impute numerical columns
+        for col in df_.select_dtypes(np.number).columns:
+            # If column has missing values and they are less than half of the total
+            if df_[str(col)].isnull().any() == True and df_[str(col)].isnull().values.sum() < len(df_[str(col)]) / 2:
+                # Values following distribution of the column(trend of data in the column)
+                values = np.arange(df_[str(col)].min(), df_[str(col)].max(), np.std(df_[str(col)]))
+                # Iterate through column values
+                for i in range(len(df_[str(col)])):
+                    if np.isnan(df_.loc[i, str(col)]):  # check if value is nan; Returns True/ False
+                        df_.loc[i, str(col)] = random.choice(values)  # pick a random value from values
+                    else:
+                        pass
+            else:
+                pass
+        # Impute categorical columns
+        for col in df_.select_dtypes('O').columns:
+            if (df_[col].dtype == 'O') & (df_[col].nunique() < 21): # consider only columns with =<20 unique values
+                # method 1 - 'random'
+                if method == 'random':
+                    values = list(df_[col].unique())
+                    if np.nan in values:
+                        values.remove(np.nan)
+                    else:
+                        pass
                     for i in range(len(df_[str(col)])):
-                        if np.isnan(df_.loc[i, str(col)]):  # check if value is nan; Returns True/ False
-
-                            df_.loc[i, str(col)] = random.choice(values)  # pick a random value from values
-                        else:
+                        try:
+                            if np.isnan(df_.loc[i, str(col)]):
+                                df_.loc[i, str(col)] = random.choice(values)
+                        except TypeError:
                             pass
-                else:
-                    pass
-
-            # Impute categorical columns
-            for col in df_.select_dtypes('O').columns:
-                if (df_[col].dtype == 'O') & (df_[col].nunique() < 21): # consider only columns with =<20 unique values
-
-                    # method 1 - 'random'
-                    if method == 'random':
-
-                        values = list(df_[col].unique())
-                        if np.nan in values:
-                            values.remove(np.nan)
-                        else:
+                # method 2 - 'constant' == 'NULL'
+                elif method == 'constant':
+                    for i in range(len(df_[str(col)])):
+                        try:
+                            if np.isnan(df_.loc[i, str(col)]):
+                                df_.loc[i, str(col)] = 'NULL'
+                        except TypeError:
                             pass
-
-                        for i in range(len(df_[str(col)])):
-                            try:
-                                if np.isnan(df_.loc[i, str(col)]):
-                                    df_.loc[i, str(col)] = random.choice(values)
-                            except TypeError:
-                                pass
-
-                    # method 2 - 'constant' == 'NULL'
-                    elif method == 'constant':
-                        for i in range(len(df_[str(col)])):
-                            try:
-                                if np.isnan(df_.loc[i, str(col)]):
-                                    df_.loc[i, str(col)] = 'NULL'
-                            except TypeError:
-                                pass
-
-                else:
-                    pass
-            print("Imputation complete.")
-            return df_
-        else:
-            print("DataFrame has no missing data hence no values to be imputed.")
+            else:
+                pass
+        print("Imputation complete.")
+        return df_
+    else:
+        print("DataFrame has no missing data hence no values to be imputed.")
