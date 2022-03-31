@@ -6,8 +6,8 @@ with open("README.md", "r") as f:
 setuptools.setup(
     name='datastand',
     packages=['datastand'],
-    version='2.4',
-    license='MIT  ',
+    version='2.4.1',
+    license='MIT',
     author="Vincent Njonge",
     author_email="njongevincent@gmail.com",
     description="""A python package to help Data Scientists, Machine Learning Engineers and Analysts 

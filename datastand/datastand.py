@@ -67,7 +67,7 @@ class datastand:
                                                                                            np.std(df[str(col)])))
                             print("_________________________________________________________________")
                         elif df[col].dtype == 'O':
-                            print(f"Most occurring value: {df[col].value_counts().index[0]}, count: {df[col].value_counts()[0]}")
+                            print(f"Most occurring value: {df[col].value_counts().index[0]}, count: {df[col].value_counts().to_list()[0]}")
                             print("_________________________________________________________________")
                         else:
                             pass
