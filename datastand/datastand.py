@@ -55,8 +55,9 @@ class datastand:
 
                     if df[str(col)].isnull().any() == True:
                         print(f"Column: \n\t{col}\n\t_______________")
-                        print("\nMissing data points {} out of total {}.".format(df[str(col)].isnull().sum(),
-                                                                                 len(df[str(col)])))
+                        print("\nMissing data points {} out of total {}; ({:.2f}%)".format(df[str(col)].isnull().sum(),
+                                                                                      len(df[str(col)]),
+                                                                                      df[str(col)].isnull().values.sum() / len(df) * 100))
 
                         # Show max, min, mean, std values of the column if numerical
                         # Helps user to choose an imputation strategy
