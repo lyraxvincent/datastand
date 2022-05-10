@@ -28,30 +28,24 @@ Output:
 ```python
 
 General stats:
-______________
-Size of DataFrame: 309200
-Shape of DataFrame: (3865, 80)
-Number of unique data types : {dtype('int64'), dtype('O'), dtype('float64')}
-Number of numerical columns: 79
-Number of non-numerical columns: 1
+==================
+Shape of DataFrame: (1202, 13)
+Number of unique data types : {dtype('int64'), dtype('O')}
+Number of numerical columns: 2
+Number of non-numerical columns: 11
 
 
 Missing data:
 =======================
-DataFrame contains 185698 missing values(60.06%) as follows column-wise:
+DataFrame contains 2670 missing values (17.09%) as follows column-wise:
 -----------------------------------------------------------------------
-galactic year                                                                   0
-galaxy                                                                          0
-existence expectancy index                                                      1
-existence expectancy at birth                                                   1
-Gross income per capita                                                        28
-                                                                             ... 
-Adjusted net savings                                                         2953
-Creature Immunodeficiency Disease prevalence, adult (% ages 15-49), total    2924
-Private galaxy capital flows (% of GGP)                                      2991
-Gender Inequality Index (GII)                                                3021
-y                                                                               0
-Length: 80, dtype: int64
+Gender                 41
+Car_Category          372
+Subject_Car_Colour    697
+Subject_Car_Make      248
+LGA_Name              656
+State                 656
+dtype: int64
 -----------------------------------------------------------------------
 
 Do you wish to long-list missing data statistics?(y/n): y

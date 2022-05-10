@@ -24,17 +24,10 @@ class datastand:
         # General statistics
 
         print("General stats:\n==================")
-        print(f"Size of DataFrame: {df.size}")
         print(f"Shape of DataFrame: {df.shape}")
         print(f"Number of unique data types : {set(df.dtypes)}")
         print(f"Number of numerical columns: {len(df.select_dtypes(np.number).columns)}")
         print(f"Number of non-numerical columns: {len(df.select_dtypes('object').columns)}")
-        
-        # Only show dataframe preview when length of all column names put together <= 100
-        if len(' '.join(df.columns)) <= 100:
-            print(f"\nHead of DataFrame:\n__________________\n{df.head()}")
-        else:
-            pass
 
         # Missing data statistics
 
@@ -43,7 +36,7 @@ class datastand:
             print(f"DataFrame contains {df.isnull().values.sum()} missing values ("
                   f"{df.isnull().values.sum() / df.size *100 :.2f}%) as follows column-wise:")
             print("-----------------------------------------------------------------------")
-            print(df.isnull().sum())  # Prints every column with corresponding number of missing values
+            print(df[df.columns[df.isnull().any()]].isnull().sum()) #df.isnull().sum() # Prints every column with corresponding number of missing values
             print("-----------------------------------------------------------------------")
 
             # Long listing missing data statistics (for every column)
