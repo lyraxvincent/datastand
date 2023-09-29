@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "datastand"
+version = "2.5.0"
+description = "A python package to help Data Scientists, Machine Learning Engineers and Analysts better understand data. Gives quick insights about given data; general dataset statistics, shape of dataset, number of unique data types, number of numerical and non-numerical columns, missing data statistics, missing data heatmap and provides methodology to impute missing data."
+authors = ["lyraxvincent <njongevincent@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+numpy = "^1.26.0"
+pandas = "^2.1.1"
+matplotlib = "^3.8.0"
+seaborn = "^0.12.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
